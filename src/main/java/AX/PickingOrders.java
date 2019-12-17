@@ -1,6 +1,6 @@
 package AX;
 
-import Base.Stammdaten;
+import Model.Stammdaten;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

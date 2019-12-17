@@ -1,4 +1,4 @@
-package Base;
+package Model;
 
 import annaik.db.client.DatabaseConnection;
 import annaik.db.server.Database;

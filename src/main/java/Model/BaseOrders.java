@@ -1,4 +1,4 @@
-package Base;
+package Model;
 
 import AX.PickingOrder;
 import AX.PickingOrderLine;

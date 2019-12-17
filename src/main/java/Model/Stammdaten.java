@@ -1,4 +1,4 @@
-package Base;
+package Model;
 
 import imulik.base.BaseLanguage;
 import narino.CustomerAttributeType;

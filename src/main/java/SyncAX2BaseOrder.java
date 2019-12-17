@@ -1,8 +1,7 @@
-import AX.AXDB;
 import AX.PickingOrders;
-import Base.BaseConnection;
-import Base.BaseOrders;
-import Base.Stammdaten;
+import Model.BaseConnection;
+import Model.BaseOrders;
+import Model.Stammdaten;
 
 import java.util.List;
 
