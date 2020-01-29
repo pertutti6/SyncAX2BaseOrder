@@ -32,7 +32,7 @@ public class Stammdaten {
         try {
             // get Language entries
             BaseLanguage langs = new BaseLanguage();
-            arrInt = langs.search();
+            arrInt = langs.search("");
             for (int i = 0; i < arrInt.length ; i++) {
                 langs = BaseLanguage.getLanguage(arrInt[i]);
                 languages.add(new SimpleTable(langs.getId(), langs.sShortName));

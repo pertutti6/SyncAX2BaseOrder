@@ -8,19 +8,20 @@ import annaik.util.VectorOfIntegers;
 
 public final class OrderPosition extends imulik.base.BaseObjectWithChilds
 {
-	public long lAXOrderlineRecID;
+	public String sChargeRequest;
+	public long lErpOrderlineID;
 	public int iLastSync;
 	public int iEshopOrderLineId;
 	public float fTotalWithTax;
 	public int iTaxCodePos;
-	public int iArticlePos;
 	public boolean bClosed;
-	public float fQuantity;
-	public int iOrderPositionId;
 	public float fReductionValue;
 	public float fReductionPercent;
 	public float fOriginalUnitPrice;
+	public float fQuantity;
+	public int iArticlePos;
 	public int iOrderPos;
+	public int iOrderPositionId;
 	private static final long serialVersionUID = 1529843026L;
 	public static OrderPosition getOrderPosition(int iPos)throws Exception{return (OrderPosition)new OrderPosition().getObject(iPos);}
 	

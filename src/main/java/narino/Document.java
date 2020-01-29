@@ -13,6 +13,7 @@ import annaik.util.ThreadsPool;
 import annaik.util.VectorOfObjects;
 public final class Document extends imulik.base.BaseObjectWithChilds
 {
+	public int iOrderPos;
 	public int iRelatedDocumentPos;
 	public boolean bClosed;
 	public String sParam;

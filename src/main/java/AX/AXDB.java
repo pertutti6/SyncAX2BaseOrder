@@ -22,21 +22,27 @@ public class AXDB {
 
     protected void setupConnection(String sEnvironment)
     {
-        if (sEnvironment.equalsIgnoreCase("Live"))
-        {
-            // Live Sytem
-            sServer = "src-axprod-01";
-            sDB = "AX2012_Prod";
-            sUser = "dwh";
-            sPassword = "Sirocco2dwh";
-        }
-        else {
-            // Test
-            sServer = "src-axprod-01";
-            sDB = "AX2012_Prod";
-            sUser = "dwh";
-            sPassword = "Sirocco2dwh";
-        }
+            switch (sEnvironment)
+            {
+                case "live" :
+                    sServer = "src-axprod-01";
+                    sDB = "AX2012_Prod";
+                    sUser = "dwh";
+                    sPassword = "Sirocco2dwh";
+                    break;
+                case "dev" :
+                    sServer = "src-axdev\\dev";
+                    sDB = "AX2012_DEV";
+                    sUser = "dwh";
+                    sPassword = "Sirocco2dwh";
+                    break;
+                default:
+                    sServer = "src-axdev\\dev";
+                    sDB = "AX2012_Prod";
+                    sUser = "dwh";
+                    sPassword = "Base2dwh";
+                    break;
+            }
     }
 
     protected String openConnection()
@@ -50,8 +56,12 @@ public class AXDB {
                 //    String dbURL = "jdbc:sqlserver://src-axprod-01\\AX2012_Prod;user=dwh;password=Sirocco2dwh";
                 //  String connectionUrl = "jdbc:sqlserver://src-dwh-01:1433;" +
                 //          "databaseName=stg;user=dwh;password=Base2dwh";
-                String connectionUrl = "jdbc:sqlserver://" + sServer + ":1433;" +
-                        "databaseName=" + sDB + ";user=" + sUser + ";password=" + sPassword;
+            //    String connectionUrl = "jdbc:sqlserver://[" + sServer + "]:1433;" +
+              //          "databaseName=" + sDB + ";user=" + sUser + ";password=" + sPassword;
+
+                String connectionUrl = "jdbc:sqlserver://src-axdev\\dev;" +
+                        "databaseName=AX2012_DEV;user=dwh;password=Sirocco2dwh";
+
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 conn = DriverManager.getConnection(connectionUrl);
                 if (conn != null) {

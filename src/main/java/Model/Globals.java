@@ -33,7 +33,18 @@ public class Globals {
         messages.add(new message(eTyp, eSystem, eArea, sMsg));
     }
 
-
+    public static String CleanString(String sText)
+    {
+     /*   sText = sText.replace("\"", " ");
+        sText = sText.replace("'", " ");
+        sText = sText.replace("&", " ");
+        sText = sText.replace("+", " ");
+        sText = sText.replace(",", " ");
+        sText = sText.replace("#", " ");
+        sText = sText.replace("`", "\'");
+        sText = sText.replace("\'", "\\'");*/
+        return sText;
+    }
 }
 
 class message

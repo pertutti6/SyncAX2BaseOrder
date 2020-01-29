@@ -32,7 +32,7 @@ public class Databases {
     static String sNewsUser = "";
     static String sNewsPassword = "";
 
-    protected void setEnvironments(String sEnvErp,String sEnvBase, String sEnvMag, String sEnvNews)
+    public void setEnvironments(String sEnvErp,String sEnvBase, String sEnvMag, String sEnvNews)
     {
         this.sEnvErp = sEnvErp;
         this.sEnvBase = sEnvBase;
@@ -68,7 +68,7 @@ public class Databases {
         return true;
     }
 
-    protected ResultSet executeMagQuery(String sSQL)
+    public ResultSet executeMagQuery(String sSQL)
     {
         ResultSet rs = null;
         Statement stmt = null;

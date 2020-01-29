@@ -4,6 +4,6 @@ public class SyncMagBase {
 
     public static void main(String[] args) {
         BaseCustomers customers = new BaseCustomers();
-
+        customers.getCustFromMag("open");
     }
 }

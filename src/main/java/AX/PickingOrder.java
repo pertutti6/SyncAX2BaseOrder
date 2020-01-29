@@ -10,6 +10,7 @@ public class PickingOrder {
     public long RecId = 0;
     public String ShipmentId = "";
     public String AXCustomerId = "";
+    public int BaseCustomerId = 0;
     public String AuftragId = "";
     public Date ActivationDateTime;
     public String DlvModeId = "";

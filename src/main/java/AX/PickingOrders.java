@@ -34,7 +34,7 @@ public class PickingOrders extends AXDB {
 
         String sFields = "shipmentId ,customer ,transRefId ,ActivationDateTime ,DlvModeId ,DlvTermId ,DlvDate ,DeliveryName,DeliveryPostalAddress ," +
                 "SIRContactPersonName ,pick.SIRDeliveryContact,BaseID ,BaseSync,PICKINGROUTEID,STREET,ZIPCODE,CITY,COUNTRYREGIONID,pick.RecId ";
-        String sWhere = "pick.DeliveryPostalAddress = loc.RECID and pickingRouteID = '3000026' and EXPEDITIONSTATUS=3 and DATAAREAID='kus'";  // TODO : replace it with a search of open orders (baseID = 0)
+        String sWhere = "pick.DeliveryPostalAddress = loc.RECID and pickingRouteID = '2000043' and EXPEDITIONSTATUS=3 and DATAAREAID='kus'";  // TODO : replace it with a search of open orders (baseID = 0)
         sErr = readTable(sFields, "WMSPickingRoute pick, LogisticsPostalAddress loc", sWhere);
         if (sErr.equals("")) {
             try {
@@ -84,8 +84,8 @@ public class PickingOrders extends AXDB {
         for (int i = 0; i < axorders.size(); i++) {
             PickingOrder order = axorders.get(i);
 
-            String sWhere = "ROUTEID = '" + order.PickingRouteId + "' and EXPEDITIONSTATUS=3 and INVENTTRANSTYPE=0 and ORDERTYPE=3 and DATAAREAID='kus'";
-            String sFields = "RECID,SIRORDERQTY,SIRBARCODE,BaseID ,BaseSync";
+            String sWhere = "ROUTEID = '" + order.PickingRouteId + "' and EXPEDITIONSTATUS=3 and INVENTTRANSTYPE=0 and ORDERTYPE=3 and DATAAREAID='kus' and itemID <> 'Titel'";
+            String sFields = "RECID,SIRORDERQTY,SIRBARCODE,inventTransId ,itemID,SIRGroundId,SIRExpiryDate,SIRProductionNoYes,SirPackingLabel,BaseID,BaseSync";
             sErr = readTable(sFields, "WMSORDERTRANS", sWhere);
             if (sErr.equals("")) {
                 try {
@@ -95,8 +95,14 @@ public class PickingOrders extends AXDB {
                         orderline.RECID = rs.getLong(1);
                         orderline.OrderQty = rs.getDouble(2);
                         orderline.Barcode = rs.getString(3);
-                        order.BaseID = rs.getInt(4);
-                        order.BaseSync = rs.getDate(5);
+                        orderline.Charge = rs.getString(4);
+                        orderline.ItemId = rs.getString(5);
+                        orderline.GrindSetup = rs.getString(6);
+                        orderline.ExpiryDate = rs.getDate(7);
+                        orderline.ProductionArticle = rs.getBoolean(8);
+                        orderline.AddPackingInfo = rs.getString(9);
+                        order.BaseID = rs.getInt(10);
+                        order.BaseSync = rs.getDate(11);
                         order.axorderlines.add(orderline);
                         stammdaten.infoMsg("read AX Rüstliste " + order.PickingRouteId + " Artikelbarcode " + orderline.Barcode);
                     }

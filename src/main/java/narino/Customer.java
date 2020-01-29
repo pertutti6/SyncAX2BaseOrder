@@ -2,6 +2,7 @@ package narino;
 import java.util.Date;
 public final class Customer extends imulik.base.BaseObjectWithChilds
 {
+	public int iErpNumber;
 	public String sCompany;
 	public int iLastSync;
 	public boolean bIsLead;
