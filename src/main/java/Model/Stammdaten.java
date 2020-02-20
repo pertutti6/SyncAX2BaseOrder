@@ -2,6 +2,7 @@ package Model;
 
 import imulik.base.BaseLanguage;
 import narino.CustomerAttributeType;
+import narino.OrderState;
 import narino.SalesChannel;
 import narino.Salutation;
 
@@ -24,6 +25,7 @@ public class Stammdaten {
     List<SimpleTable> salutations = new ArrayList<SimpleTable>();
     List<SimpleTable> customerstypes = new ArrayList<SimpleTable>();
     List<SimpleTable> saleschanneltypes = new ArrayList<SimpleTable>();
+    List<SimpleTable> orderStates = new ArrayList<SimpleTable>();
 
     public String getStammdaten()
     {
@@ -61,12 +63,34 @@ public class Stammdaten {
                 saleschannel = SalesChannel.getSalesChannel(arrInt[i]);
                 saleschanneltypes.add(new SimpleTable(saleschannel.getId(), saleschannel.sName));
             }
+
+            //get order states
+            OrderState orderState = new OrderState();
+            arrInt = orderState.search();
+            for (int i = 0; i < arrInt.length ; i++) {
+                orderState = OrderState.getOrderState(arrInt[i]);
+                orderStates.add(new SimpleTable(orderState.getId(), orderState.sName));
+            }
+
         }
         catch (Exception e) {
             e.printStackTrace();
         }
         return sErr;
     }
+
+    public int getOrderStatePos(String sOrderState)
+    {
+        int iID = 0;
+        for (int i = 0; i < orderStates.size(); i++) {
+            if (orderStates.get(i).sCode.equalsIgnoreCase(sOrderState))
+            {
+                return orderStates.get(i).iBaseID;
+            }
+        }
+        return iID;
+    }
+
 
     public int getLanguage(String sLang)
     {
@@ -162,5 +186,7 @@ public class Stammdaten {
             this.sCode = sCode;
         }
     }
+
+
 
 }

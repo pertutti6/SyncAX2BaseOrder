@@ -39,7 +39,7 @@ public class BaseOrders {
                 else {
                     baseorder.dateCreation = axorder.ActivationDateTime;
                     //    baseorder.iDeliveryTypePos;
-                    baseorder.iSalesChannelPos = stammdaten.getSalesChannelType("AX");
+                    baseorder.iSalesChannelPos = axorder.iSalesChannelID;
                     baseorder.sComment = "";
                     sHeader = axorder.DeliveryName;
                     if (!axorder.DeliveryContact.equals("")) {
@@ -50,6 +50,7 @@ public class BaseOrders {
                     baseorder.dDlvDate = axorder.DlvDate;
                     baseorder.sAXPickingSlipId = axorder.PickingRouteId;
                     baseorder.iCustomerPos = axorder.BaseCustomerId;
+                    baseorder.iOrderStatePos = stammdaten.getOrderStatePos("new");
                     iOrderPos = baseorder.add();
                     stammdaten.infoMsg("Speicher in Base Rüstliste " + axorder.PickingRouteId);
                     if (iOrderPos > 0) {
@@ -74,15 +75,14 @@ public class BaseOrders {
                                 // customized article
                                 Article article = new Article();
                                 article.sNumber = axLine.ItemId;
-                                int[] intArt = article.search();
+                                int[] intArt = article.search("sNumber");
                                 if (intArt.length == 0) {
                                     stammdaten.errorMsg("Artikel in Base nicht gefunden. Artikel Nr : " + axLine.ItemId + ". AX Rüstliste " + axorder.PickingRouteId);
                                     continue;
                                 }
                                 if (intArt.length > 1) {
                                     stammdaten.errorMsg("Mehrere Artikel in Base mit gleicher Artikel Nr : " + axLine.ItemId + ". AX Rüstliste " + axorder.PickingRouteId);
-
-                                    // TODo  wieder aktivieren continue;
+                                    continue;
                                 }
                                 baseLine.iArticlePos = intArt[0];
                                 baseLine.sChargeRequest = axLine.Charge;
@@ -146,7 +146,13 @@ public class BaseOrders {
             // Create Postlocation. Die Adress muss unveränderbar sein.
             PostalLocation postal = new PostalLocation();
             postal.iCountryPos = iCountryId;
-            postal.sZipCode = sPLZ;
+            if (sPLZ.equals(""))
+            {
+                postal.sZipCode = " ";
+            }
+            else {
+                postal.sZipCode = sPLZ;
+            }
             postal.sCity = sPlace;
             iPostalId = postal.add();
 
@@ -157,7 +163,7 @@ public class BaseOrders {
             iAddrId = address.add();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            stammdaten.errorMsg("System error : " + e.toString());
         }
         return iAddrId;
     }

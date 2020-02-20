@@ -20,6 +20,11 @@ public class SyncAX2BaseOrder {
         stammdaten = Stammdaten.getInstance();
         stammdaten.getStammdaten();
 
+        System.out.println("***************************************************");
+        System.out.println("** Start Synchronisation of Pickingslips V1.01  ***");
+        System.out.println("***************************************************");
+
+
         String sErr;
         PickingOrders axorders = new PickingOrders("dev");
         sErr = axorders.readOpenOrders();

@@ -2,6 +2,8 @@ package narino;
 import java.util.Date;
 public final class AX_DELIVERY_PICKED extends imulik.base.BaseObjectWithChilds
 {
+	public String User;
+	public String PackingSlipId;
 	public Date PickedDate;
 	public boolean NeedsSync2AX;
 	public int PickedQty;

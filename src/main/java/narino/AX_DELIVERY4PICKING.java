@@ -15,6 +15,7 @@ public final class AX_DELIVERY4PICKING extends imulik.base.BaseObjectWithChilds
 	public String categorynr;
 	public String itemName;
 	public String ITEMID;
+	public String ITEMBARCODE;
 	public String DELIVERYDATE;
 	public String PACKINGSLIPID;
 	public String accountNr;

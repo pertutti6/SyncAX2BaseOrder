@@ -20,6 +20,7 @@ public class PickingOrder {
     public String DeliveryPostalAddress = "";
     public String ContactPersonName = "";
     public String DeliveryContact = "";
+    public int iSalesChannelID = 0;
     int BaseID = 0;
     Date BaseSync;
     public String PickingRouteId;

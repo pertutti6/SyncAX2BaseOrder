@@ -23,7 +23,7 @@ public class BaseOrder {
     public String sComment;
     private String sLanguage;
     private Date dCreation;
-    private int iSalesChannelID;
+    public int iSalesChannelID;
 
     // Discount
     private String sCouponName;

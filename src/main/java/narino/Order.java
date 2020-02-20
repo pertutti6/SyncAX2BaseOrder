@@ -9,6 +9,8 @@ import annaik.db.client.IDatabase;
 import annaik.util.HandledException;
 public final class Order extends imulik.base.BaseObjectWithChilds
 {
+	public int iOrderStockPos;
+	public int iOrderStatePos;
 	public String sAXPackingSlipId;
 	public Date dDlvDate;
 	public String sAXPickingSlipId;

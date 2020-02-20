@@ -32,9 +32,11 @@ public class PickingOrders extends AXDB {
             return sErr;
         }
 
+        // and pickingRouteID = '2000053'
+
         String sFields = "shipmentId ,customer ,transRefId ,ActivationDateTime ,DlvModeId ,DlvTermId ,DlvDate ,DeliveryName,DeliveryPostalAddress ," +
-                "SIRContactPersonName ,pick.SIRDeliveryContact,BaseID ,BaseSync,PICKINGROUTEID,STREET,ZIPCODE,CITY,COUNTRYREGIONID,pick.RecId ";
-        String sWhere = "pick.DeliveryPostalAddress = loc.RECID and pickingRouteID = '2000043' and EXPEDITIONSTATUS=3 and DATAAREAID='kus'";  // TODO : replace it with a search of open orders (baseID = 0)
+                "SIRContactPersonName ,pick.SIRDeliveryContact,BaseID ,BaseSync,PICKINGROUTEID,STREET,ZIPCODE,CITY,COUNTRYREGIONID,pick.RecId,pick.SIREXPORTNOYES ";
+        String sWhere = "pick.DeliveryPostalAddress = loc.RECID and BASEID = 0 and EXPEDITIONSTATUS >= 3 and EXPEDITIONSTATUS <= 10 and DATAAREAID='kus' ";  // TODO : replace it with a search of open orders (baseID = 0)
         sErr = readTable(sFields, "WMSPickingRoute pick, LogisticsPostalAddress loc", sWhere);
         if (sErr.equals("")) {
             try {
@@ -60,6 +62,14 @@ public class PickingOrders extends AXDB {
                     order.AdressPlace = rs.getString(17);
                     order.AdressCountry = rs.getString(18);
                     order.RecId = rs.getLong(19);
+                    boolean isExport = rs.getBoolean(20);
+                    if (isExport)
+                    {
+                        order.iSalesChannelID = stammdaten.getSalesChannelType("AX Export");
+                    }
+                    else {
+                        order.iSalesChannelID = stammdaten.getSalesChannelType("AX");
+                    }
                     axorders.add(order);
                     stammdaten.infoMsg("read AX Rüstliste " + order.PickingRouteId);
                 }
