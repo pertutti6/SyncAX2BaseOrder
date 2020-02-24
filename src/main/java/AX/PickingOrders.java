@@ -36,7 +36,7 @@ public class PickingOrders extends AXDB {
 
         String sFields = "shipmentId ,customer ,transRefId ,ActivationDateTime ,DlvModeId ,DlvTermId ,DlvDate ,DeliveryName,DeliveryPostalAddress ," +
                 "SIRContactPersonName ,pick.SIRDeliveryContact,BaseID ,BaseSync,PICKINGROUTEID,STREET,ZIPCODE,CITY,COUNTRYREGIONID,pick.RecId,pick.SIREXPORTNOYES ";
-        String sWhere = "pick.DeliveryPostalAddress = loc.RECID  and EXPEDITIONSTATUS >= 3 and EXPEDITIONSTATUS <= 10 and DATAAREAID='kus' and pick.PICKINGROUTEID = '2000062'";  // and BASEID = 0
+        String sWhere = "pick.DeliveryPostalAddress = loc.RECID  and EXPEDITIONSTATUS >= 3 and EXPEDITIONSTATUS <= 10 and DATAAREAID='kus' and pick.PICKINGROUTEID = '2000065'";  //and BASEID = 0"; //and pick.PICKINGROUTEID = '2000062'";  // and BASEID = 0
         sErr = readTable(sFields, "WMSPickingRoute pick, LogisticsPostalAddress loc", sWhere);
         if (sErr.equals("")) {
             try {
