@@ -11,7 +11,8 @@ public class SyncAX2BaseOrder {
     public static void main(String[] args) {
         // Connect to Base
         BaseConnection base = new BaseConnection();
-        base.setConnection("test");
+        base.setConnection("live");
+        String sAXEnvironment = "live";
 
         stammdaten = Stammdaten.getInstance();
         stammdaten.getStammdaten();
@@ -22,7 +23,7 @@ public class SyncAX2BaseOrder {
 
 
         String sErr;
-        PickingOrders axorders = new PickingOrders("dev");
+        PickingOrders axorders = new PickingOrders(sAXEnvironment);
         sErr = axorders.readOpenOrders();
         if (!sErr.equals(""))
         {

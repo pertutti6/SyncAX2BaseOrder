@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_syncax2baseorder" default="compile.module.syncax2baseorder">
+  <dirname property="module.syncax2baseorder.basedir" file="${ant.file.module_syncax2baseorder}"/>
+  
+  <property name="module.jdk.home.syncax2baseorder" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.syncax2baseorder" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.syncax2baseorder" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.syncax2baseorder" value="-encoding UTF-8 -source 7 -target 7 ${compiler.args}"/>
+  
+  <property name="syncax2baseorder.output.dir" value="${module.syncax2baseorder.basedir}/target/classes"/>
+  <property name="syncax2baseorder.testoutput.dir" value="${module.syncax2baseorder.basedir}/target/test-classes"/>
+  
+  <path id="syncax2baseorder.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="syncax2baseorder.module.production.classpath">
+    <path refid="${module.jdk.classpath.syncax2baseorder}"/>
+    <pathelement location="${basedir}/libs/sqljdbc42.jar"/>
+    <pathelement location="${basedir}/libs/base.jar"/>
+    <path refid="library.maven:_org.mariadb.jdbc:mariadb-java-client:2.5.2.classpath"/>
+    <path refid="library.maven:_com.sun.mail:javax.mail:1.6.2.classpath"/>
+    <path refid="library.maven:_javax.activation:activation:1.1.classpath"/>
+  </path>
+  
+  <path id="syncax2baseorder.runtime.production.module.classpath">
+    <pathelement location="${syncax2baseorder.output.dir}"/>
+    <pathelement location="${basedir}/libs/sqljdbc42.jar"/>
+    <pathelement location="${basedir}/libs/base.jar"/>
+    <path refid="library.maven:_org.mariadb.jdbc:mariadb-java-client:2.5.2.classpath"/>
+    <path refid="library.maven:_com.sun.mail:javax.mail:1.6.2.classpath"/>
+    <path refid="library.maven:_javax.activation:activation:1.1.classpath"/>
+  </path>
+  
+  <path id="syncax2baseorder.module.classpath">
+    <path refid="${module.jdk.classpath.syncax2baseorder}"/>
+    <pathelement location="${syncax2baseorder.output.dir}"/>
+    <pathelement location="${basedir}/libs/sqljdbc42.jar"/>
+    <pathelement location="${basedir}/libs/base.jar"/>
+    <path refid="library.maven:_org.mariadb.jdbc:mariadb-java-client:2.5.2.classpath"/>
+    <path refid="library.maven:_com.sun.mail:javax.mail:1.6.2.classpath"/>
+    <path refid="library.maven:_javax.activation:activation:1.1.classpath"/>
+  </path>
+  
+  <path id="syncax2baseorder.runtime.module.classpath">
+    <pathelement location="${syncax2baseorder.testoutput.dir}"/>
+    <pathelement location="${syncax2baseorder.output.dir}"/>
+    <pathelement location="${basedir}/libs/sqljdbc42.jar"/>
+    <pathelement location="${basedir}/libs/base.jar"/>
+    <path refid="library.maven:_org.mariadb.jdbc:mariadb-java-client:2.5.2.classpath"/>
+    <path refid="library.maven:_com.sun.mail:javax.mail:1.6.2.classpath"/>
+    <path refid="library.maven:_javax.activation:activation:1.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.syncax2baseorder">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.syncax2baseorder">
+    <patternset refid="excluded.from.module.syncax2baseorder"/>
+  </patternset>
+  
+  <path id="syncax2baseorder.module.sourcepath">
+    <dirset dir="${module.syncax2baseorder.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="syncax2baseorder.module.test.sourcepath">
+    <dirset dir="${module.syncax2baseorder.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.syncax2baseorder" depends="compile.module.syncax2baseorder.production,compile.module.syncax2baseorder.tests" description="Compile module SyncAX2BaseOrder"/>
+  
+  <target name="compile.module.syncax2baseorder.production" depends="register.custom.compilers" description="Compile module SyncAX2BaseOrder; production classes">
+    <mkdir dir="${syncax2baseorder.output.dir}"/>
+    <javac2 destdir="${syncax2baseorder.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.syncax2baseorder}/javac">
+      <compilerarg line="${compiler.args.syncax2baseorder}"/>
+      <bootclasspath refid="syncax2baseorder.module.bootclasspath"/>
+      <classpath refid="syncax2baseorder.module.production.classpath"/>
+      <src refid="syncax2baseorder.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.syncax2baseorder"/>
+    </javac2>
+    
+    <copy todir="${syncax2baseorder.output.dir}">
+      <fileset dir="${module.syncax2baseorder.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.syncax2baseorder.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.syncax2baseorder.tests" depends="register.custom.compilers,compile.module.syncax2baseorder.production" description="compile module SyncAX2BaseOrder; test classes" unless="skip.tests">
+    <mkdir dir="${syncax2baseorder.testoutput.dir}"/>
+    <javac2 destdir="${syncax2baseorder.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.syncax2baseorder}/javac">
+      <compilerarg line="${compiler.args.syncax2baseorder}"/>
+      <bootclasspath refid="syncax2baseorder.module.bootclasspath"/>
+      <classpath refid="syncax2baseorder.module.classpath"/>
+      <src refid="syncax2baseorder.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.syncax2baseorder"/>
+    </javac2>
+    
+    <copy todir="${syncax2baseorder.testoutput.dir}">
+      <fileset dir="${module.syncax2baseorder.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.syncax2baseorder" description="cleanup module">
+    <delete dir="${syncax2baseorder.output.dir}"/>
+    <delete dir="${syncax2baseorder.testoutput.dir}"/>
+  </target>
+</project>

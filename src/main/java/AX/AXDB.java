@@ -59,8 +59,11 @@ public class AXDB {
             //    String connectionUrl = "jdbc:sqlserver://[" + sServer + "]:1433;" +
               //          "databaseName=" + sDB + ";user=" + sUser + ";password=" + sPassword;
 
-                String connectionUrl = "jdbc:sqlserver://src-axdev\\dev;" +
-                        "databaseName=AX2012_DEV;user=dwh;password=Sirocco2dwh";
+             //   String connectionUrl = "jdbc:sqlserver://src-axdev\\dev;" +
+             //           "databaseName=AX2012_DEV;user=dwh;password=Sirocco2dwh";
+
+                String connectionUrl = "jdbc:sqlserver://" + sServer + ";" +
+                        "databaseName=" + sDB + ";user= " + sUser + ";password="  + sPassword;
 
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 conn = DriverManager.getConnection(connectionUrl);

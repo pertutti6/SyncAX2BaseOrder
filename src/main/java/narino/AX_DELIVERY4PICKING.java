@@ -20,6 +20,6 @@ public final class AX_DELIVERY4PICKING extends imulik.base.BaseObjectWithChilds
 	public String PACKINGSLIPID;
 	public String accountNr;
 	public String CREATEDDATETIME;
-	private static final long serialVersionUID = 1560346883L;
+	private static final long serialVersionUID = 1561017088L;
 	public static AX_DELIVERY4PICKING getAX_DELIVERY4PICKING(int iPos)throws Exception{return (AX_DELIVERY4PICKING)new AX_DELIVERY4PICKING().getObject(iPos);}
 }

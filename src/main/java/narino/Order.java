@@ -11,9 +11,10 @@ public final class Order extends imulik.base.BaseObjectWithChilds
 {
 	public int iOrderStockPos;
 	public int iOrderStatePos;
-	public String sAXPackingSlipId;
 	public Date dDlvDate;
 	public String sAXPickingSlipId;
+	public String sAXPackingSlipId;
+	public int iOrderIDSync;
 	public float fDeliveryCosts;
 	public int iDeliveryTypePos;
 	public int iLastSync;
@@ -24,13 +25,12 @@ public final class Order extends imulik.base.BaseObjectWithChilds
 	public String sTransactionId;
 	public String sEsrReference;
 	public int iPaymentMethodPos;
-	public boolean bClosed;
 	public Date dateCreation;
+	public int iOrderId;
+	public boolean bClosed;
+	public int iCustomerPos;
 	public int iInvoiceAdressPos;
 	public int iDeliveryAdressPos;
-	public int iCustomerPos;
-	public int iOrderId;
-	public int iOrderIDSync;
 	private static final long serialVersionUID = 1529843025L;
 	public static Order getOrder(int iPos)throws Exception{return (Order)new Order().getObject(iPos);}
 	
